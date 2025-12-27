@@ -92,8 +92,8 @@ class _MyHomePageState extends State<TodoHome> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
 
-    return TodoListStore(
-      todoList: TodoViewModel(),
+    return TodoListProvider(
+      notifier: TodoViewModel(),
       child: Scaffold(
         appBar: AppBar(
           // TRY THIS: Try changing the color here to a specific color (to
