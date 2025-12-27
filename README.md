@@ -1,6 +1,8 @@
 # todo_lister
 
-A new Flutter project.
+A flutter foundation project (The key with this is to use todo list in mastering the fundamentals of flutter state management, animation, etc.)
+
+The intention is for this to be over-engineered as it's meant to be highly experimental.
 
 ## Getting Started
 
