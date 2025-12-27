@@ -22,7 +22,7 @@ class _EntryFormState extends State<EntryForm> {
 
   @override
   Widget build(BuildContext context) {
-    final todoModel = TodoListStore.of(widget.outerContext).todoList;
+    final todoModel = TodoListProvider.of<TodoViewModel>(widget.outerContext);
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
