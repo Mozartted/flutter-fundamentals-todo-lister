@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_lister/models.dart';
+import 'package:todo_lister/store/todo-view-model.dart';
 
 enum TodoState { done, pending }
 
@@ -17,26 +18,21 @@ class TodoListViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final todoList = TodoListStore.of(context).todoList;
+    final todoList = TodoListProvider.of<TodoViewModel>(context);
 
     return Container(
-      child: ListenableBuilder(
-        listenable: todoList,
-        builder: (BuildContext ctx, child) {
-          return ListView.builder(
-            itemCount: todoList.todoList.length,
-            itemBuilder: (BuildContext ctx, int i) {
-              var todoItem = todoList.todoList[i];
-              return ListTile(
-                title: Text(todoItem.name, style: TextStyle(fontSize: 15)),
-                trailing: IconButton(
-                  onPressed: () => todoList.checked(i),
-                  icon: todoItem.state == TodoState.done
-                      ? Icon(Icons.check_circle)
-                      : Icon(Icons.check_circle_outlined),
-                ),
-              );
-            },
+      child: ListView.builder(
+        itemCount: todoList.todoList.length,
+        itemBuilder: (BuildContext ctx, int i) {
+          var todoItem = todoList.todoList[i];
+          return ListTile(
+            title: Text(todoItem.name, style: TextStyle(fontSize: 15)),
+            trailing: IconButton(
+              onPressed: () => todoList.checked(i),
+              icon: todoItem.state == TodoState.done
+                  ? Icon(Icons.check_circle)
+                  : Icon(Icons.check_circle_outlined),
+            ),
           );
         },
       ),

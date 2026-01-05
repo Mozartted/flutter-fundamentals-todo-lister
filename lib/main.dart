@@ -72,16 +72,22 @@ class _MyHomePageState extends State<TodoHome> {
 
   final TodoViewModel viewModel = TodoViewModel();
 
-  void enterTodo(String value) {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      // listRef.add((name: value, state: TodoState.pending));
-    });
+  @override
+  void initState() {
+    super.initState();
+    viewModel.initTodoList();
   }
+
+  // void enterTodo(String value) {
+  //   setState(() {
+  //     // This call to setState tells the Flutter framework that something has
+  //     // changed in this State, which causes it to rerun the build method below
+  //     // so that the display can reflect the updated values. If we changed
+  //     // _counter without calling setState(), then the build method would not be
+  //     // called again, and so nothing would appear to happen.
+  //     // listRef.add((name: value, state: TodoState.pending));
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -92,8 +98,8 @@ class _MyHomePageState extends State<TodoHome> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
 
-    return TodoListStore(
-      todoList: TodoViewModel(),
+    return TodoListProvider(
+      notifier: viewModel,
       child: Scaffold(
         appBar: AppBar(
           // TRY THIS: Try changing the color here to a specific color (to
@@ -118,18 +124,19 @@ class _MyHomePageState extends State<TodoHome> {
             return FloatingActionButton(
               child: Icon(Icons.add),
               onPressed: () {
-                showModalBottomSheet(
-                  context: ctx1,
-                  isScrollControlled: true,
-                  builder: (BuildContext ctx) {
-                    return EntryForm(
-                      outerContext: ctx1,
-                      // onChanged: (String value) {
-                      //   enterTodo(value);
-                      // },
-                    );
-                  },
-                );
+                viewModel.initTodoList();
+                // showModalBottomSheet(
+                //   context: ctx1,
+                //   isScrollControlled: true,
+                //   builder: (BuildContext ctx) {
+                //     return EntryForm(
+                //       outerContext: ctx1,
+                //       // onChanged: (String value) {
+                //       //   enterTodo(value);
+                //       // },
+                //     );
+                //   },
+                // );
               },
             );
           },
